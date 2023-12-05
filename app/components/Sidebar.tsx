@@ -1,5 +1,5 @@
 export function Sidebar() {
-    return <section className="border">
+    return <section className="sidebar border">
         <div>Sidebar</div>
   </section>
   };
