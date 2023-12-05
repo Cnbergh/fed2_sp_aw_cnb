@@ -12,8 +12,8 @@ const navItems = ['Home', 'Profile', 'Contact'];
 export default function App() {
 const [activeNav, setActiveNav] = useState(navItems[0]);
   return (
-    <main className="container mx-auto flex">
-      <section className="flex-grow">
+    <main className="container mx-auto flex border">
+      <section className="flex-grow border">
         {listings.map((listing, index) => (
           <div key={index} className={`${activeNav === 'Home' ? 'block' : 'hidden'}`}>
             {/* Dette er hvor du ville lagt inn logikk for å vise din listing detaljert */}
@@ -28,7 +28,7 @@ const [activeNav, setActiveNav] = useState(navItems[0]);
           {/* Innhold for Contact */}
         </div>
       </section>
-      <div className="w-48">
+      <div className="w-48 border">
         <nav>
           {navItems.map((item, index) => (
             <p
