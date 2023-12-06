@@ -1,16 +1,15 @@
 "use client"
 
-import { Nav } from "./components";
+import {Header, Sidebar , Footer} from './components';
 
-export default function App() {
+function App() {
   return (
-    <main>
-      <div data-router-wrapper>
-        <div data-router-view>
-          <Nav />
-{/*           <Component {...pageProps} /> */}
-        </div>
-      </div>
-    </main>
+    <main className='container'>
+        <Header />
+        <Sidebar />
+        <Footer />
+        </main>
   );
 }
+
+export default App;
