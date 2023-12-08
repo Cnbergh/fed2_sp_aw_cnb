@@ -50,7 +50,9 @@ export async function registerUser({ email, password, username }) {
 
     const data = await response.json();
     localStorage.setItem("token", data.accessToken);
+    localStorage.setItem("user_name", data.name);
     localStorage.setItem("user_email", data.email);
+    localStorage.setItem("avatar", data.avatar);
 
     return data;
   } catch (error) {
@@ -76,7 +78,9 @@ export async function loginUser({ email, password }) {
 
     const data = await response.json();
     localStorage.setItem("token", data.accessToken);
+    localStorage.setItem("user_name", data.name);
     localStorage.setItem("user_email", data.email);
+    localStorage.setItem("avatar", data.avatar);
     return data;
   } catch (error) {
     throw new Error(error);
