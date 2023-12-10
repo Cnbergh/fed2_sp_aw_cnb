@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint-fix": "eslint --fix ."
   },
   "dependencies": {
     "@next/font": "^13.4.4",
@@ -20,7 +21,7 @@
     "tailwind-scrollbar": "^3.0.4"
   },
   "devDependencies": {
-    "@types/node": "20.10.4",
+    "@types/node": "^18",
     "@types/react": "18.2.43",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
