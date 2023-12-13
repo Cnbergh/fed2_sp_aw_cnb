@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import ProductsUI from "./Ui/ProductsUi";
-import { ListingsResponse } from "../pages/api/type";
-import fetchApiListings from "../pages/api/api";
+import { Product } from "../pages/api/type";
+import { fetchApiListings } from "../pages/api/api";
 
 export default function Listings() {
-  const [data, setData] = useState<ListingsResponse | null>(null);
+    const [data, setData] = useState<Product[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -12,9 +12,10 @@ export default function Listings() {
     const fetchData = async () => {
       try {
         const response = await fetchApiListings();
-        setData(response);
+        setData(response as Product[]);
       } catch (error) {
         setError(error as Error);
+        setData(null);
       } finally {
         setIsLoading(false);
       }
@@ -27,7 +28,7 @@ export default function Listings() {
     <ProductsUI
       error={error}
       isLoading={isLoading}
-      products={data?.products || []}
+      products={data || []}
     />
   );
 }

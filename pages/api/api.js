@@ -17,7 +17,7 @@ import { API_URL, Login_URL, SignUp_URL } from "./constants";
  * @returns {Object} - HTTP header options with Authorization header
  */
 
-function updateOptions(options) {
+/* function updateOptions(options) {
   const update = { ...options };
   if (localStorage.getItem("token")) {
     update.headers = {
@@ -26,15 +26,15 @@ function updateOptions(options) {
     };
   }
   return update;
-}
+} */
 
 /**
  * Wrapper around fetch to add Authorization header
  * @returns {Promise} - fetch promise
  */
-export default function fetcher(url, options) {
+/* export default function fetcher(url, options) {
   return fetch(url, updateOptions(options));
-}
+} */
 
 /**
  * *Register user - (signUp page)

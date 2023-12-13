@@ -12,6 +12,3 @@ export interface Product {
   };
 }
 
-export interface ListingsResponse {
-  products: Product[];
-}
