@@ -1,5 +1,8 @@
+"use-client"
 // framer motion
 import { motion } from "framer-motion";
+
+import Listings from '../components/Listings';
 
 // variants
 import { fadeIn } from "../variants";
@@ -34,6 +37,7 @@ const Home = () => {
           </motion.p>
         </div>
       </div>
+      <Listings/>
     </main>
   );
 };

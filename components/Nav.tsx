@@ -25,6 +25,7 @@ import Link from "next/link";
 
 // next router
 import { useRouter } from "next/router";
+import Tooltip from "./Ui/Tooltip";
 
 //My Nav
 const Nav = () => {
@@ -47,15 +48,8 @@ const Nav = () => {
               key={index}
             >
               {/* tooltip */}
-              <div className="absolute pr-14 right-0 hidden xl:group-hover:flex">
-                <div className="bg-white relative flex text-primary items-center p-[6px] rounded-[3px]">
-                  <div className="text-[12px] leading-none font-semibold capitalize">
-                    {link.name}
-                  </div>
-                  {/* triangle */}
-                  <div className="border-solid border-l-white border-l-8 border-y-transparent border-y-[6px] border-r-0 absolute -right-2"></div>
-                </div>
-              </div>
+             <Tooltip>{link.name}</Tooltip>
+              
               {/* icon */}
               <div>{link.icon}</div>
             </Link>

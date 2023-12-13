@@ -1,4 +1,15 @@
-import { API_URL } from "./constants";
+import { API_URL, Login_URL, SignUp_URL } from "./constants";
+
+/**
+ * REST API
+ * Here are all the API functions and helpers.
+ * Section 1: User update, user login, user sign up.
+ * Section 2: Data fetching, listings, credit.
+ */
+
+/**
+ * -------- Section 1 --------
+ */
 
 /**
  * Helper function to add the
@@ -25,9 +36,11 @@ export default function fetcher(url, options) {
   return fetch(url, updateOptions(options));
 }
 
-/** *Sign up user - register page*/
+/**
+ * *Register user - (signUp page)
+ */
 export async function registerUser({ email, password, username }) {
-  const url = new URL(`${API_URL}/auth/register`);
+  const url = new URL(`${SignUp_URL}`);
 
   const userData = {
     name: username,
@@ -44,7 +57,7 @@ export async function registerUser({ email, password, username }) {
   };
 
   try {
-    const response = await fetch(url, options);
+    const response = await fetcher(url, options);
 
     if (!response.ok) throw new Error(response.statusText);
 
@@ -62,7 +75,7 @@ export async function registerUser({ email, password, username }) {
 
 /** *Login user - login page*/
 export async function loginUser({ email, password }) {
-  const url = new URL(`${API_URL}/auth/login`);
+  const url = new URL(`${Login_URL}`);
 
   const options = {
     method: "POST",
@@ -72,7 +85,7 @@ export async function loginUser({ email, password }) {
     body: JSON.stringify({ email, password }),
   };
   try {
-    const response = await fetch(url, options);
+    const response = await fetcher(url, options);
 
     if (!response.ok) throw new Error(response.statusText);
 
@@ -91,4 +104,35 @@ export async function loginUser({ email, password }) {
 export function logoutUser() {
   localStorage.removeItem("token");
   localStorage.removeItem("user_email");
+}
+
+/**
+ * -------- Section 2 --------
+ */
+
+/**
+ * Fetch all posts with comments, reactions and the author
+ * @returns {Object | Error} - A list of posts -------------------------------------------
+ */
+
+export async function fetchApiListings() {
+  const url = new URL(`${API_URL}/listings`);
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) throw new Error(response.statusText);
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }

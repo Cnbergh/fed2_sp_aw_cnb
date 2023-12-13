@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 // framer motion
 import { AnimatePresence, motion } from 'framer-motion';
 
-// type
+// AppProps
 import type { AppProps } from 'next/app';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
