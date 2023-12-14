@@ -22,10 +22,14 @@ import { BsArrowRight } from "react-icons/bs";
 import Error from "../../components/Ui/Error";
 import { useAuth } from "../../components/AuthContext";
 
+interface LoginResponse {
+  name: string;
+}
+
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<LoginResponse | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const { login } = useAuth();
   const router = useRouter();
