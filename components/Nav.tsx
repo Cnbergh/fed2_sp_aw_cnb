@@ -25,6 +25,8 @@ import Link from "next/link";
 
 // next router
 import { useRouter } from "next/router";
+
+// components
 import Tooltip from "./Ui/Tooltip";
 
 //My Nav

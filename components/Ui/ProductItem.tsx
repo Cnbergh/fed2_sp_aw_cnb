@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Product } from '../../pages/api/type';
+import React, { useState } from "react";
+import { Product } from "../../pages/api/type";
 
 // next image
 import Image from "next/image";
@@ -14,33 +14,34 @@ interface ProductItemProps {
 
 //Listing (card)
 export default function ProductItem({ product }: ProductItemProps) {
-  const [imgSrc, setImgSrc] = useState(product.media[0]);
+  const [imgSrc, setImgSrc] = useState(product.media[0] || FALLBACK_IMAGE);
 
   const handleImgError = () => {
     setImgSrc(FALLBACK_IMAGE);
   };
   return (
-    <div className="relative rounded-lg overflow-hidden flex items-center justify-center group">
-      <div className='flex items-center justify-center relative overflow-hidden group'>
-      <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#e838cc] to-[#4a22bd] opacity-80 group-hover:opacity-100 transition-all duration-700">
-        <img
-         src={imgSrc}
-         width={300} height={200}
-         alt={product.title || "Listing Image"}
-         onError={handleImgError}/>
-      </div>
-      <div className="flex justify-between mt-4">
-        <div>
-          <h3 className="text-sm text-gray-700">
-            <Link href={`/listings/${product.id}`}>
-              <span aria-hidden="true" className="absolute inset-0" />
-              {product.title}
-            </Link>
-          </h3>
+    <Link href={`/listings/${product.id}`} className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
+        <div className="h-[70%] w-full overflow-hidden">
+          <img
+            src={imgSrc}
+            alt={product.title || "Listing Image"}
+            onError={handleImgError}
+            className="w-full h-full object-cover"
+          />
         </div>
-        <p className="text-sm font-medium text-gray-900">{product.description}</p>
-      </div>
-      </div>
-    </div>
+        <div className="p-4 flex flex-col">
+          <h4 className="text-2xl truncate">{product.title}</h4>
+          <div className="flex gap-4 text-sm mt-2">
+            <div>
+              <p className="text-[#898888]">Current bid</p>
+              <p className="font-bold text-[#242424]">No bids</p> {/* Replace with actual bid */}
+            </div>
+            <div>
+              <p className="text-[#898888]">Time left</p>
+              <p className="font-bold text-[#242424]">Time</p> {/* Replace with actual time left */}
+            </div>
+          </div>
+        </div>
+    </Link>
   );
 }

@@ -17,7 +17,7 @@ import { API_URL, Login_URL, SignUp_URL } from "./constants";
  * @returns {Object} - HTTP header options with Authorization header
  */
 
-/* function updateOptions(options) {
+function updateOptions(options) {
   const update = { ...options };
   if (localStorage.getItem("token")) {
     update.headers = {
@@ -26,15 +26,15 @@ import { API_URL, Login_URL, SignUp_URL } from "./constants";
     };
   }
   return update;
-} */
+}
 
 /**
  * Wrapper around fetch to add Authorization header
  * @returns {Promise} - fetch promise
  */
-/* export default function fetcher(url, options) {
+export default function fetcher(url, options) {
   return fetch(url, updateOptions(options));
-} */
+}
 
 /**
  * *Register user - (signUp page)
@@ -57,7 +57,7 @@ export async function registerUser({ email, password, username }) {
   };
 
   try {
-    const response = await fetcher(url, options);
+    const response = await fetch(url, options);
 
     if (!response.ok) throw new Error(response.statusText);
 
@@ -132,7 +132,7 @@ export async function fetchApiListings() {
 
     const data = await response.json();
 
-    return data;
+    return data.slice(0, 20);
   } catch (error) {
     throw new Error("Failed to get listings. Please try again later.");
   }

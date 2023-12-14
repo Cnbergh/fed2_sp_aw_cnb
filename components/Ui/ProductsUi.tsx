@@ -16,7 +16,7 @@ export default function ProductsUI({
   error = null,
 }: ProductsUIProps) {
   return (
-    <article className="bg-white">
+    <article className="">
       <div className="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h4 className="text-2xl font-bold tracking-tight text-gray-900">
           List of Products
@@ -24,7 +24,7 @@ export default function ProductsUI({
 
         {error && <Error>{error?.message}</Error>}
 
-        <div className="grid grid-cols-2 grid-rows-2 gap-4 cursor-pointer">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-4 cursor-pointer">
           {isLoading ? (
             <Skeleton />
           ) : (

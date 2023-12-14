@@ -1,19 +1,18 @@
-"use-client"
+"use-client";
 // framer motion
 import { motion } from "framer-motion";
 
-import Listings from '../components/Listings';
+import Listings from "../components/Listings";
 
 // variants
 import { fadeIn } from "../variants";
 
 const Home = () => {
   return (
-    <main className="h-full bg-primary/30">
-      {/* text */}
-      <div className="container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full">
-        <div className="text-center flex flex-col justify-center xl:pt-40 xl:text-left h-full container mx-auto">
-          {/* title */}
+    <main className="bg-primary/30">
+      <div className="container mx-auto flex flex-col md:flex-row">
+        {/* Hero text section */}
+        <div className="md:w-1/2 p-8">
           <motion.h1
             variants={fadeIn("right", 0.2)}
             initial="hidden"
@@ -23,33 +22,33 @@ const Home = () => {
           >
             My <br /> Home <span className="text-accent">Page</span>
           </motion.h1>
-          {/* subtitle */}
           <motion.p
             variants={fadeIn("right", 0.3)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16"
+            className="max-w-sm xl:max-w-xl mb-10 xl:mb-16"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
             nostrum quam reprehenderit vero, tenetur voluptatem nulla aut
             aspernatur dolores ut.
           </motion.p>
         </div>
-      </div>
-      {/* Listings container */}
-      <div className='container mx-auto'>
-        {/* listingsProp */}
-        <motion.div
-          variants={fadeIn('up', 0.5)}
-          initial='hidden'
-          animate='show'
-          exit='hidden'
-          transition={{ duration: 1, ease: 'easeInOut' }}
-          className='w-full h-full max-w-[737px] max-h-[800px] absolute -bottom-32 lg:bottom-0 lg:right-[8%]'
-        >
-          <Listings />
-        </motion.div>
+
+        {/* Listings section */}
+        <div className="md:w-1/2">
+          {/* listingsProp */}
+          <motion.div
+            variants={fadeIn("up", 0.5)}
+            initial="hidden"
+            animate="show"
+            exit="hidden"
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className=""
+          >
+            <Listings />
+          </motion.div>
+        </div>
       </div>
     </main>
   );
