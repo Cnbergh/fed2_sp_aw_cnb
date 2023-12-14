@@ -39,6 +39,7 @@ body {
   color: #f13024;
 }
 
+
 @layer base {
   body {
     @apply
@@ -81,4 +82,28 @@ body {
   .textarea {
     @apply w-full h-[180px] p-6 border border-b-2 capitalize resize-none;
   }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: white !important;
+  background-color: transparent !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: transparent !important;
+  outline: none !important;
+  border-bottom: 2px solid #f13024;
+  color: white;
+  -webkit-text-fill-color: white !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+}
+
+input:-internal-autofill-selected::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 300;
 }

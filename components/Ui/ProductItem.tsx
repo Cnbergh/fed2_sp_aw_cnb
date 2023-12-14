@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Product } from "../../pages/api/type";
 
-// next image
-import Image from "next/image";
-
 // next link
 import Link from "next/link";
 

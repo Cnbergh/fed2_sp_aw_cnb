@@ -22,7 +22,7 @@ export default function ProductsUI({
           List of Products
         </h4>
 
-        {error && <Error>{error?.message}</Error>}
+        {error && <Error errorKey={error.message} message={error.message} />}
 
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-4 cursor-pointer">
           {isLoading ? (
