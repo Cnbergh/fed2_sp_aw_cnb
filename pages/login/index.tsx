@@ -35,10 +35,14 @@ const Login = () => {
       router.push("/");
     }, 1500);
   };
-  const handleOnSubmit = async (event) => {
+  const handleOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const { email, password } = event.target.elements;
+    const { email, password } = event.target as typeof event.target & {
+      email: { value: string };
+      password: { value: string };
+    };
+
     const payload = {
       email: email.value,
       password: password.value,
@@ -48,11 +52,12 @@ const Login = () => {
       setIsLoading(true);
       const res = await loginUser(payload);
       setData(res);
-      await login(payload);
+      await login(res.accessToken);
       setIsSuccess(true);
       navigateToHome();
-    } catch (error) {
-      setError("Failed to login. Please check your credentials.");
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || "Failed to login. Please check your credentials.";
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
