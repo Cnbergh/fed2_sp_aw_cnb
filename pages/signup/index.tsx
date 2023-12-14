@@ -1,3 +1,4 @@
+import React from 'react';
 // API fetch
 import { registerUser, loginUser } from "../api/api";
 // Next Router
@@ -20,7 +21,7 @@ const SignUp = () => {
   const { login } = useAuth();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -28,12 +29,12 @@ const SignUp = () => {
     confirmPassword: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { username, email, password, confirmPassword } = formData;
     let errorMessages = [];
