@@ -24,7 +24,7 @@ export default function ProductsUI({
 
         {error && <Error>{error?.message}</Error>}
 
-        <div className="grid grid-cols-1 mt-6 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 cursor-pointer">
           {isLoading ? (
             <Skeleton />
           ) : (

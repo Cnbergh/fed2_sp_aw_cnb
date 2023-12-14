@@ -5,7 +5,7 @@ interface LayoutProps {
 }
 
 // fonts
-import { Sora } from '@next/font/google';
+import { Sora } from 'next/font/google';
 
 // font settings
 const sora = Sora({

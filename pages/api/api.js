@@ -127,12 +127,13 @@ export async function fetchApiListings() {
   try {
     const response = await fetch(url, options);
 
-    if (!response.ok) throw new Error(response.statusText);
+    if (!response.ok)
+      throw new Error("Failed to fetch listings. Please try again later.");
 
     const data = await response.json();
 
     return data;
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error("Failed to get listings. Please try again later.");
   }
 }
