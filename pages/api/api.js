@@ -1,4 +1,4 @@
-import { API_URL, Login_URL, SignUp_URL } from "./constants";
+import { API_URL, Login_URL, SignUp_URL, Profile_URL } from "./constants";
 
 /**
  * REST API
@@ -110,11 +110,6 @@ export function logoutUser() {
  * -------- Section 2 --------
  */
 
-/**
- * Fetch all posts with comments, reactions and the author
- * @returns {Object | Error} - A list of posts -------------------------------------------
- */
-
 export async function fetchApiListings(offset = 0, limit = 9) {
   const url = new URL(`${API_URL}/listings?offset=${offset}&limit=${limit}`);
   const options = {
@@ -138,5 +133,60 @@ export async function fetchApiListings(offset = 0, limit = 9) {
     return data;
   } catch (error) {
     throw new Error("Failed to get listings. Please try again later.");
+  }
+}
+
+export async function fetchUserListings() {
+  const url = new URL(`${Profile_URL}/${username}/listings`);
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response = await fetcher(url, options);
+
+    if (!response.ok) {
+      throw new Error(
+        "Failed to fetch profile listings. Please try again later."
+      );
+    }
+
+    const data = await response.json();
+    if (!data) {
+      throw new Error("Invalid data format received");
+    }
+    return data;
+  } catch (error) {
+    throw new Error("Failed to get profile listings. Please try again later.");
+  }
+}
+
+export async function fetchUserWins() {}
+
+export async function fetchUserProfile() {
+  const username = localStorage.getItem("user_name");
+  const url = new URL(`${Profile_URL}/${username}`);
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response = await fetcher(url, options);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch profile. Please try again later.");
+    }
+
+    const data = await response.json();
+    if (!data) {
+      throw new Error("Invalid data format received");
+    }
+    return data;
+  } catch (error) {
+    throw new Error("Failed to get profile. Please try again later.");
   }
 }

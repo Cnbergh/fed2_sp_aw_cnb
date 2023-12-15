@@ -12,3 +12,13 @@ export interface Product {
   };
 }
 
+export interface Profile {
+    name: string,
+    email: string,
+    avatar: string[],
+    credits: number,
+    wins: [string],
+    _count: {
+      listings: number
+    }
+}
