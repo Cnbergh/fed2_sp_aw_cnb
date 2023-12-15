@@ -115,8 +115,8 @@ export function logoutUser() {
  * @returns {Object | Error} - A list of posts -------------------------------------------
  */
 
-export async function fetchApiListings() {
-  const url = new URL(`${API_URL}/listings`);
+export async function fetchApiListings(offset = 0, limit = 9) {
+  const url = new URL(`${API_URL}/listings?offset=${offset}&limit=${limit}`);
   const options = {
     method: "GET",
     headers: {
@@ -127,12 +127,15 @@ export async function fetchApiListings() {
   try {
     const response = await fetch(url, options);
 
-    if (!response.ok)
+    if (!response.ok) {
       throw new Error("Failed to fetch listings. Please try again later.");
+    }
 
     const data = await response.json();
-
-    return data.slice(0, 20);
+    if (!Array.isArray(data)) {
+      throw new Error("Invalid data format received");
+    }
+    return data;
   } catch (error) {
     throw new Error("Failed to get listings. Please try again later.");
   }

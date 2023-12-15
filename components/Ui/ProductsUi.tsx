@@ -1,43 +1,35 @@
-
 import { Product } from '../../pages/api/type';
 import ProductItem from "./ProductItem";
 import Skeleton from "./Skeleton";
 import Error from "./Error";
 
 interface ProductsUIProps {
-    products: Product[];
-    isLoading: boolean;
-    error: Error | null;
-  }
+  products: Product[];
+  isLoading: boolean;
+  error: string | null;
+  loadMoreProducts: () => void;
+}
 
-export default function ProductsUI({
-  products = [],
-  isLoading = true,
-  error = null,
-}: ProductsUIProps) {
+export default function ProductsUI({ products, isLoading, error, loadMoreProducts }: ProductsUIProps) {
   return (
-    <article className="">
-      <div className="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h4 className="text-2xl font-bold tracking-tight text-gray-900">
-          List of Products
-        </h4>
+    <article>
+      <h4 className="text-2xl font-bold text-gray-900">List of Products</h4>
 
-        {error && <Error errorKey={error.message} message={error.message} />}
+      {error && <Error errorKey="products_ui_error" message={error} />}
 
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-4 cursor-pointer">
-          {isLoading ? (
-            <Skeleton />
-          ) : (
-            products.map(product => (
-                <ProductItem
-                  key={product.id}
-                  product={product}
-                />
-              ),
-            )
-          )}
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {isLoading ? <Skeleton /> : products.map((product, index) => (
+    <ProductItem key={`${product.id}-${index}`} product={product} />
+  ))}
       </div>
+
+      {!isLoading && products.length && (
+        <button 
+          onClick={loadMoreProducts} 
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+          Load More
+        </button>
+      )}
     </article>
   );
 }

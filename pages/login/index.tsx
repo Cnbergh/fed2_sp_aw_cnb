@@ -85,9 +85,9 @@ const Login = () => {
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           {isSuccess ? (
-            <section className="text-center flex flex-col justify-center xl:pt-10 xl:text-left h-full mx-auto">
+            <section className="text-center flex flex-col justify-center pb-10 xl:pb-20 xl:text-left h-full mx-auto">
               <motion.h2
-                variants={fadeIn("down", 0.2)}
+                variants={fadeIn("up", 0.2)}
                 initial="hidden"
                 animate="show"
                 exit="hidden"

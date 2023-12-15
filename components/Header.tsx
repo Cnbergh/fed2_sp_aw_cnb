@@ -13,7 +13,7 @@ const Header = () => {
   
   const handleLogout = () => {
     logout();
-    router.push('/login'); // Redirect after logout
+    router.push('/login');
   };
 
   const handleBid = () => {

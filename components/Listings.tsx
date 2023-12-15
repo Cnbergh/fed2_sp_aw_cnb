@@ -4,31 +4,40 @@ import { Product } from "../pages/api/type";
 import { fetchApiListings } from "../pages/api/api";
 
 export default function Listings() {
-    const [data, setData] = useState<Product[] | null>(null);
+  const [data, setData] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loadedProducts, setLoadedProducts] = useState<number>(9);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
       try {
-        const response = await fetchApiListings();
-        setData(response as Product[]);
-      } catch (error) {
-        setError(error as Error);
-        setData(null);
+        const response = await fetchApiListings(data.length, loadedProducts);
+        if (Array.isArray(response)) {
+          setData(prevData => [...prevData, ...response]);
+        } else {
+          console.error("Response is not an array:", response);
+        }
+      } catch (error: any) {
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
-    };
-
+    }
+  
     fetchData();
-  }, []);
+  }, [loadedProducts]);
+
+  const loadMoreProducts = () => {
+    setLoadedProducts(prev => prev + 9);
+  };
 
   return (
     <ProductsUI
-      error={error}
+      products={data}
       isLoading={isLoading}
-      products={data || []}
+      error={error}
+      loadMoreProducts={loadMoreProducts}
     />
   );
 }
