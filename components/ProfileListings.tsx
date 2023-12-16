@@ -4,39 +4,45 @@ import ProductsUI from "./Ui/ProductsUi";
 import { Product } from "../pages/api/type";
 
 const ProfileListings = () => {
-  const [products, setListings] = useState<Product[]>([]);
+    const [data, setData] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [loadedProducts, setLoadedProducts] = useState<number>(9);
 
   useEffect(() => {
     const loadListings = async () => {
       try {
-        const data = await fetchUserListings();
-        setListings(data);
+        const response = await fetchUserListings(data.length, loadedProducts);
+        if (Array.isArray(response)) {
+          setData(prevData => [...prevData, ...response]);
+        } else {
+          console.error("Response is not an array:", response);
+        }
       } catch (error: any) {
         setError(error.message);
       } finally {
         setIsLoading(false);
       }
-    };
-
+    }
     loadListings();
   }, []);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  // Define loadMoreProducts if necessary, or remove it if not used.
+  const loadMoreProducts = () => {
+    setLoadedProducts(prev => prev + 9);
+  };
 
   return (
     <div>
       <h2>Your Listings</h2>
       <div className="flex flex-col items-center gap-x-8 h-full px-16">
         <ProductsUI
-          products={products}
+          products={data}
           isLoading={isLoading}
           error={error}
-          // loadMoreProducts={loadMoreProducts} // Include this if you have implemented pagination
+          loadMoreProducts={loadMoreProducts}
         />
       </div>
     </div>

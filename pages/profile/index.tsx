@@ -12,7 +12,6 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      // Redirect to login page if not logged in
       router.push('/login');
       return;
     }

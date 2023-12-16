@@ -1,6 +1,7 @@
 "use-client";
 import { Profile } from "../pages/api/type";
 import ProfileListings from "./ProfileListings";
+import UpdateAvatar from "./UpdateAvatar";
 
 interface ProfileItemProps {
   profile: Profile;
@@ -21,6 +22,7 @@ const Dashboard = ({ profile }: ProfileItemProps) => {
           <div className="flex flex-col p-10">
             <h1>{profile.name}'s Dashboard</h1>
             <p>Active Balance: {profile.credits} $</p>
+            <UpdateAvatar />
           </div>
         </div>
       </div>

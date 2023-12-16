@@ -15,9 +15,9 @@ export interface Product {
 export interface Profile {
     name: string,
     email: string,
-    avatar: string[],
+    avatar: string,
     credits: number,
-    wins: [string],
+    wins: string[],
     _count: {
       listings: number
     }

@@ -136,12 +136,14 @@ export async function fetchApiListings(offset = 0, limit = 9) {
   }
 }
 
-export async function fetchUserListings() {
+export async function fetchUserListings(offset = 0, limit = 9) {
   const username = localStorage.getItem("user_name");
   if (!username) {
     throw new Error("No username found in storage.");
   }
-  const url = new URL(`${Profile_URL}/${username}/listings`);
+  const url = new URL(
+    `${Profile_URL}/${username}/listings?offset=${offset}&limit=${limit}`
+  );
   const options = {
     method: "GET",
     headers: {
