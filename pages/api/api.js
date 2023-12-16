@@ -110,6 +110,8 @@ export function logoutUser() {
  * -------- Section 2 --------
  */
 
+
+
 export async function fetchApiListings(offset = 0, limit = 9) {
   const url = new URL(`${API_URL}/listings?offset=${offset}&limit=${limit}`);
   const options = {

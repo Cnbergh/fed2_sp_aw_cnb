@@ -6,3 +6,4 @@ export const API_URL =
 export const Login_URL = `${API_URL}/auth/login`;
 export const SignUp_URL = `${API_URL}/auth/register`;
 export const Profile_URL = `${API_URL}/profiles`;
+export const PRODUCT_API = `${API_URL}/auction/listings`;

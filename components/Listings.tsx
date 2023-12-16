@@ -28,7 +28,7 @@ export default function Listings() {
     }
   
     fetchData();
-  }, [loadedProducts]);
+  }, []);
 
   if (isLoading) {
     return <Skeleton />;

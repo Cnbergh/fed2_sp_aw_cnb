@@ -1,4 +1,3 @@
-"use-client"
 import Link from "next/link";
 import MultiPurposeButton from "./Ui/ButtonMultiPurpose";
 import { useRouter } from "next/router";

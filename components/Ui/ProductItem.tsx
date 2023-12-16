@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Product } from "../../pages/api/type";
 import MultiPurposeButton from "./ButtonMultiPurpose";
+import makeBid from "../../pages/api/makeBid";
 
 // next link
 import Link from "next/link";
@@ -11,15 +12,25 @@ interface ProductItemProps {
 }
 
 //Listing (card)
-export default function ProductItem({ product }: ProductItemProps) {
+function ProductItem({ product }: ProductItemProps) {
   const [imgSrc, setImgSrc] = useState(product.media[0] || FALLBACK_IMAGE);
+  const [bidAmount, setBidAmount] = useState<number>(0);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleImgError = () => {
     setImgSrc(FALLBACK_IMAGE);
   };
 
-  const handleBid = () => {
-    console.log("Bid placed!");
+  const handleBid = async () => {
+    try {
+      setIsSubmitting(true);
+      await makeBid(product.id, bidAmount);
+      console.log('Bid placed!');
+    } catch (error) {
+      console.error('Error placing bid:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -57,7 +68,19 @@ export default function ProductItem({ product }: ProductItemProps) {
           </span>
         </div>
       </div>
-      <MultiPurposeButton isBidButton={true} onBid={handleBid}/>
+      <div className="flex flex-row">
+         {/* Bid Amount Input */}
+         <input
+              type="number"
+              value={bidAmount}
+              onChange={(e) => setBidAmount(Number(e.target.value))}
+              placeholder="Enter bid amount"
+              className="input mb-2"
+              disabled={isSubmitting}
+            />
+             <MultiPurposeButton isBidButton={true} onBid={handleBid}/>
+        </div>
     </Link>
   );
 }
+export default ProductItem

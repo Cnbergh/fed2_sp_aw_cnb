@@ -9,7 +9,6 @@ const CreateListing = () => {
   const [endsAt, setEndsAt] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
 
   const handleTagsChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTags(e.target.value.split(','));
