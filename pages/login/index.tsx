@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 // useState
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // framer motion
 import { motion } from "framer-motion";
@@ -32,14 +32,21 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState<LoginResponse | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { login } = useAuth();
+  const { isLoggedIn, login } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/profile');
+    }
+  }, [isLoggedIn, router]);
 
   const navigateToProfile = () => {
     setTimeout(() => {
       router.push("/profile");
     }, 1500);
   };
+
   const handleOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 

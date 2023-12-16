@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Dashboard from '../../components/Dashboard';
 import { fetchUserProfile } from '../api/api';
-import { useAuth } from '../../components/AuthContext'; // Adjust the import path as necessary
+import { useAuth } from '../../components/AuthContext';
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const { isLoggedIn } = useAuth(); // Use the isLoggedIn state from the AuthContext
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     if (!isLoggedIn) {

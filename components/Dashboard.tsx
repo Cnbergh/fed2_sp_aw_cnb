@@ -2,6 +2,7 @@
 import { Profile } from "../pages/api/type";
 import ProfileListings from "./ProfileListings";
 import UpdateAvatar from "./UpdateAvatar";
+import CreateListing from "./CreateListing";
 
 interface ProfileItemProps {
   profile: Profile;
@@ -27,12 +28,11 @@ const Dashboard = ({ profile }: ProfileItemProps) => {
         </div>
       </div>
       <div>
-        <h2>Active Listings</h2>
-        <ProfileListings/>
+        <h2>Wins</h2>
+        <CreateListing/>
       </div>
       <div>
-        <h2>Wins</h2>
-        {/* Implement logic to display wins */}
+        <ProfileListings/>
       </div>
     </main>
   );
