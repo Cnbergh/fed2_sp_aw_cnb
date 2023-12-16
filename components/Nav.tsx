@@ -1,3 +1,4 @@
+"use-client"
 // icons
 import { HiHome, HiUser, HiEnvelope } from "react-icons/hi2";
 

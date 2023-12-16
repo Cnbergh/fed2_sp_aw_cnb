@@ -1,3 +1,4 @@
+"use-client"
 // icons
 import { BsArrowRight } from 'react-icons/bs';
 

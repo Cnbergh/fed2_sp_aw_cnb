@@ -1,3 +1,4 @@
+"use-client"
 // API fetch
 import { loginUser } from "../api/api";
 
@@ -34,9 +35,9 @@ const Login = () => {
   const { login } = useAuth();
   const router = useRouter();
 
-  const navigateToHome = () => {
+  const navigateToProfile = () => {
     setTimeout(() => {
-      router.push("/");
+      router.push("/profile");
     }, 1500);
   };
   const handleOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -58,7 +59,7 @@ const Login = () => {
       setData(res);
       await login(res.accessToken);
       setIsSuccess(true);
-      navigateToHome();
+      navigateToProfile();
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || "Failed to login. Please check your credentials.";
       setError(errorMessage);

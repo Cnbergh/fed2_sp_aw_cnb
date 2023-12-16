@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import Tooltip from "./Tooltip";
+import { useAuth } from "../AuthContext";
 
 // icons
 import { BsArrowRight } from "react-icons/bs";
 
 interface MultiPurposeButtonProps {
     isBidButton: boolean;
-    isLoggedIn: boolean;
-    onNavigateToLogin: () => void;
-    onLogout: () => void;
-    onBid: () => void;
+    onNavigateToLogin?: () => void;
+    onLogout?: () => void;
+    onBid?: () => void;
   }
   
   const MultiPurposeButton = ({
     isBidButton,
-    isLoggedIn,
     onNavigateToLogin,
     onLogout,
     onBid,
   }: MultiPurposeButtonProps) => {
-    
+    const { isLoggedIn } = useAuth();
+  
     const handleClick = () => {
-      if (isBidButton) {
+      if (isBidButton && onBid) {
         onBid();
       } else {
-        isLoggedIn ? onLogout() : onNavigateToLogin();
+        isLoggedIn ? onLogout?.() : onNavigateToLogin?.();
       }
     };
   

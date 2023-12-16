@@ -1,3 +1,4 @@
+"use-client"
 import React from 'react';
 // API fetch
 import { registerUser, loginUser } from "../api/api";

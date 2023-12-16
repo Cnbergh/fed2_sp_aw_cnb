@@ -137,6 +137,10 @@ export async function fetchApiListings(offset = 0, limit = 9) {
 }
 
 export async function fetchUserListings() {
+  const username = localStorage.getItem("user_name");
+  if (!username) {
+    throw new Error("No username found in storage.");
+  }
   const url = new URL(`${Profile_URL}/${username}/listings`);
   const options = {
     method: "GET",
@@ -152,9 +156,8 @@ export async function fetchUserListings() {
         "Failed to fetch profile listings. Please try again later."
       );
     }
-
     const data = await response.json();
-    if (!data) {
+    if (!Array.isArray(data)) {
       throw new Error("Invalid data format received");
     }
     return data;

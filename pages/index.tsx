@@ -10,9 +10,9 @@ import { fadeIn } from "../variants";
 const Home = () => {
   return (
     <main className="bg-primary/30">
-      <div className="container mx-auto flex flex-col lg:flex-row">
+      <div className="container mx-auto flex flex-col">
         {/* Hero text section */}
-        <div className="lg:w-1/2 p-8">
+        <div className="p-8">
           <motion.h1
             variants={fadeIn("right", 0.2)}
             initial="hidden"
@@ -43,7 +43,7 @@ const Home = () => {
         </div>
 
         {/* Listings section */}
-        <div className="lg:w-1/2">
+        <div className="">
           {/* listingsProp */}
           <motion.div
             variants={fadeIn("up", 0.5)}

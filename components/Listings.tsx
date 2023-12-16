@@ -1,5 +1,7 @@
+"use-client"
 import { useEffect, useState } from "react";
 import ProductsUI from "./Ui/ProductsUi";
+import Skeleton from "./Ui/Skeleton";
 import { Product } from "../pages/api/type";
 import { fetchApiListings } from "../pages/api/api";
 
@@ -27,6 +29,14 @@ export default function Listings() {
   
     fetchData();
   }, [loadedProducts]);
+
+  if (isLoading) {
+    return <Skeleton />;
+  }
+
+  if (error) {
+    return <span>Error: {error}</span>;
+  }
 
   const loadMoreProducts = () => {
     setLoadedProducts(prev => prev + 9);

@@ -8,7 +8,7 @@ interface ErrorProps {
     const [isVisible, setIsVisible] = useState(true);
   
     useEffect(() => {
-      setIsVisible(true); // Reset visibility when errorKey changes
+      setIsVisible(true);
     }, [errorKey]);
   
     if (!isVisible) return null;
@@ -22,7 +22,7 @@ interface ErrorProps {
           >
             X
           </button>
-          <p className="text-accent">Error: <span className="text-white">{message}</span></p>
+          <p className="text-accent">Error: <span className="text-white">{message}:</span></p>
         </div>
       </div>
     );
