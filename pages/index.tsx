@@ -1,37 +1,32 @@
+"use-client";
 // framer motion
 import { motion } from "framer-motion";
+import Hero from "../components/Hero";
+import Listings from "../components/Listings";
 
 // variants
 import { fadeIn } from "../variants";
 
 const Home = () => {
   return (
-    <main className="h-full bg-primary/30">
-      {/* text */}
-      <div className="container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full">
-        <div className="text-center flex flex-col justify-center xl:pt-40 xl:text-left h-full container mx-auto">
-          {/* title */}
-          <motion.h1
-            variants={fadeIn("right", 0.2)}
+    <main className="bg-primary/30">
+      <div className="container mx-auto flex flex-col">
+        {/* Hero text section */}
+        <Hero/>
+
+        {/* Listings section */}
+        <div className="">
+          {/* listingsProp */}
+          <motion.div
+            variants={fadeIn("up", 0.5)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h1"
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className=""
           >
-            My <br /> Home <span className="text-accent">Page</span>
-          </motion.h1>
-          {/* subtitle */}
-          <motion.p
-            variants={fadeIn("right", 0.3)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
-            nostrum quam reprehenderit vero, tenetur voluptatem nulla aut
-            aspernatur dolores ut.
-          </motion.p>
+            <Listings />
+          </motion.div>
         </div>
       </div>
     </main>
