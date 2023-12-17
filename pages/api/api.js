@@ -110,10 +110,21 @@ export function logoutUser() {
  * -------- Section 2 --------
  */
 
-
-
-export async function fetchApiListings(offset = 0, limit = 9) {
-  const url = new URL(`${API_URL}/listings?offset=${offset}&limit=${limit}`);
+export async function fetchApiListings(
+  offset = 0,
+  limit = 9,
+  searchTerm = "",
+  isActive = true,
+  tag = "",
+  sortBy = "newest"
+) {
+  let url = `${API_URL}/listings?offset=${offset}&limit=${limit}`;
+  if (tag) {
+    url += `&_tag=${tag}`;
+  }
+  if (!isActive) {
+    url += `&_active=false`;
+  }
   const options = {
     method: "GET",
     headers: {
@@ -123,22 +134,40 @@ export async function fetchApiListings(offset = 0, limit = 9) {
 
   try {
     const response = await fetch(url, options);
-
     if (!response.ok) {
       throw new Error("Failed to fetch listings. Please try again later.");
     }
-
     const data = await response.json();
     if (!Array.isArray(data)) {
       throw new Error("Invalid data format received");
     }
-    return data;
+    // Filter by search term here if necessary
+    const filteredData = searchTerm
+      ? data.filter(
+          (product) =>
+            product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.tags.some((tag) =>
+              tag.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        )
+      : data;
+    // Sort data based on `sortBy` parameter
+    const sortedData =
+      sortBy === "newest"
+        ? filteredData.sort(
+            (a, b) =>
+              new Date(b.created).getTime() - new Date(a.created).getTime()
+          )
+        : filteredData.sort(
+            (a, b) =>
+              new Date(a.created).getTime() - new Date(b.created).getTime()
+          );
+    return sortedData;
   } catch (error) {
     throw new Error("Failed to get listings. Please try again later.");
   }
 }
-
-export async function fetchUserListings(offset = 0, limit = 9) {
+export async function fetchUserListings(offset = 0, limit = 12) {
   const username = localStorage.getItem("user_name");
   if (!username) {
     throw new Error("No username found in storage.");

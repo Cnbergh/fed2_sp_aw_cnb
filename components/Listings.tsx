@@ -1,36 +1,49 @@
-"use-client"
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import SearchBar from "./SearchBar";
 import ProductsUI from "./Ui/ProductsUi";
 import Skeleton from "./Ui/Skeleton";
-import { Product } from "../pages/api/type";
 import { fetchApiListings } from "../pages/api/api";
 
 export default function Listings() {
-  const [data, setData] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [loadedProducts, setLoadedProducts] = useState<number>(9);
+  const [loadedProducts, setLoadedProducts] = useState(12);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isActive, setIsActive] = useState(true);
+  const [sortBy, setSortBy] = useState('newest');
+  const [tag, setTag] = useState('');
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetchApiListings(data.length, loadedProducts);
-        if (Array.isArray(response)) {
-          setData(prevData => [...prevData, ...response]);
-        } else {
-          console.error("Response is not an array:", response);
-        }
-      } catch (error: any) {
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-  
     fetchData();
-  }, []);
+  }, [loadedProducts, isActive, sortBy, searchTerm, tag]);
 
-  if (isLoading) {
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetchApiListings(0, loadedProducts, searchTerm, isActive, tag, sortBy);
+      if (Array.isArray(response)) {
+        setData(response);
+      } else {
+        console.error("Response is not an array:", response);
+      }
+    } catch (error: any) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSearch = (newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+    fetchData();
+  };
+
+  const loadMoreProducts = () => {
+    setLoadedProducts(prev => prev + 12);
+  };
+
+  if (isLoading && data.length === 0) {
     return <Skeleton />;
   }
 
@@ -38,16 +51,15 @@ export default function Listings() {
     return <span>Error: {error}</span>;
   }
 
-  const loadMoreProducts = () => {
-    setLoadedProducts(prev => prev + 9);
-  };
-
   return (
-    <ProductsUI
-      products={data}
-      isLoading={isLoading}
-      error={error}
-      loadMoreProducts={loadMoreProducts}
-    />
+    <>
+      <SearchBar onSearch={handleSearch} />
+      <ProductsUI
+        products={data}
+        isLoading={isLoading}
+        error={error}
+        loadMoreProducts={loadMoreProducts}
+      />
+    </>
   );
 }

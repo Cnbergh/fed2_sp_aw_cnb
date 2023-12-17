@@ -23,7 +23,6 @@ const BidsComponent = ({ productId }) => {
         });
         const data = await response.json();
 
-        // Check if the response contains the 'bids' array and handle accordingly
         if (data && data.bids && Array.isArray(data.bids)) {
           const sortedBids = data.bids.sort((a, b) => new Date(b.created) - new Date(a.created));
           setBids(sortedBids);
@@ -47,12 +46,10 @@ const BidsComponent = ({ productId }) => {
       <h3>Bids for this product:</h3>
       <ul>
         {bids.map(bid => (
-          <li key={bid.id} className="flex px-1 text-xs text-gray-900 whitespace-nowrap flex-wrap">
-            <tr>
-              <td className='px-1'>Bidder: {bid.bidderName}</td>
-              <td className='px-1'>Amount: {bid.amount}</td>
-              <td className='px-1'>Date: {new Date(bid.created).toLocaleString()}</td>
-            </tr>
+          <li key={bid.id} className="flex flex-row px-1 text-xs text-gray-900 whitespace-nowrap flex-wrap">
+              <span className='px-1'>Bidder: {bid.bidderName}</span>
+              <span className='px-1'>Amount: {bid.amount}</span>
+              <span className='px-1'>Date: {new Date(bid.created).toLocaleString()}</span>
           </li>
         ))}
       </ul>
