@@ -91,7 +91,7 @@ const Login = () => {
             Login to <br /> your <span className="text-accent">account</span>
           </motion.h1>
         </div>
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm mb-12">
           {isSuccess ? (
             <section className="text-center flex flex-col justify-center pb-10 xl:pb-20 xl:text-left h-full mx-auto">
               <motion.h2
@@ -104,7 +104,7 @@ const Login = () => {
               </motion.h2>
             </section>
           ) : (
-            <section className="text-center flex flex-col justify-center xl:pt-10 xl:text-left h-full mx-auto">
+            <section className="text-center flex flex-col justify-center xl:pt-10 xl:text-left h-full mx-auto mb-2">
               {/* form */}
               <motion.form
                 variants={fadeIn("up", 0.4)}

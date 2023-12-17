@@ -67,7 +67,7 @@ const SignUp = () => {
     <main className="h-full bg-primary/30">
       {/* Text section */}
       <div className="container mx-auto py-32 text-center xl:text-left flex flex-col items-center justify-center h-full">
-        <div className="text-center flex flex-col justify-center xl:pt-40 xl:text-left h-full mx-auto">
+        <div className="text-center flex flex-col justify-center xl:text-left h-full mx-auto">
           {/* Title and subtitle */}
           <motion.h1
             variants={fadeIn("right", 0.2)}
@@ -92,8 +92,8 @@ const SignUp = () => {
           {error && <Error errorKey={error} message={error} />}
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <section className="text-center flex flex-col justify-center xl:pt-10 xl:text-left h-full mx-auto">
+        <div className="mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
+          <section className="text-center flex flex-col justify-center xl:pt-2 xl:text-left h-full mx-auto mb-4">
             {/* form */}
             <motion.form
               variants={fadeIn("up", 0.4)}
@@ -169,7 +169,7 @@ const SignUp = () => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16 pt-2 xl:pt-4"
+              className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-12 xl:mb-16 pt-2 xl:pt-2"
             >
               Already have an account?{" "}
               <Link

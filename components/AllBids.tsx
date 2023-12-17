@@ -47,11 +47,11 @@ const BidsComponent = ({ productId }: BidsComponentProps) => {
   if (!isLoggedIn) return null;
 
   return (
-    <div className="border px-1">
-      <h3>Bids for this product:</h3>
-      <ul>
+    <div className="border-x-2 px-1 border-accent/70 max-w-sm truncate">
+      <h3 className='text-stone-100/70'>Bids for this product:</h3>
+      <ul className='truncate max-h-96'>
         {bids.map(bid => (
-          <li key={bid.id} className="flex flex-row px-1 text-xs text-gray-900 whitespace-nowrap flex-wrap">
+          <li key={bid.id} className="flex flex-row px-1 text-xs text-gray-400 whitespace-nowrap flex-wrap border-b-2 border-accent/70">
             <span className='px-1'>Bidder: {bid.bidderName}</span>
             <span className='px-1'>Amount: {bid.amount}</span>
             <span className='px-1'>Date: {new Date(bid.created).toLocaleString()}</span>
