@@ -1,0 +1,63 @@
+import { useEffect, useState } from 'react';
+import { useAuth } from './AuthContext';
+
+interface Bid {
+  id: string;
+  amount: number;
+  created: string;
+  bidderName: string;
+}
+
+const BidsComponent = ({ productId }) => {
+  const [bids, setBids] = useState<Bid[]>([]);
+  const { isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    const fetchBids = async () => {
+      try {
+        const response = await fetch(`https://api.noroff.dev/api/v1/auction/listings/${productId}/?_seller=true&_bids=true`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+
+        // Check if the response contains the 'bids' array and handle accordingly
+        if (data && data.bids && Array.isArray(data.bids)) {
+          const sortedBids = data.bids.sort((a, b) => new Date(b.created) - new Date(a.created));
+          setBids(sortedBids);
+        } else {
+          console.error('Unexpected response structure:', data);
+        }
+      } catch (error) {
+        console.error('Error fetching bids:', error);
+      }
+    };
+
+    if (isLoggedIn && productId) {
+      fetchBids();
+    }
+  }, [productId, isLoggedIn]);
+
+  if (!isLoggedIn) return null;
+
+  return (
+    <div className="border px-1">
+      <h3>Bids for this product:</h3>
+      <ul>
+        {bids.map(bid => (
+          <li key={bid.id} className="flex px-1 text-xs text-gray-900 whitespace-nowrap flex-wrap">
+            <tr>
+              <td className='px-1'>Bidder: {bid.bidderName}</td>
+              <td className='px-1'>Amount: {bid.amount}</td>
+              <td className='px-1'>Date: {new Date(bid.created).toLocaleString()}</td>
+            </tr>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default BidsComponent;

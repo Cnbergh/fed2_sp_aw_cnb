@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { useRouter } from 'next/router';
 
 const CreateListing = () => {
   const [title, setTitle] = useState<string>('');

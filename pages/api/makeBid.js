@@ -1,21 +1,31 @@
 const makeBid = async (listingId, amount) => {
-  const Token = JSON.parse(localStorage.getItem("user")).accessToken;
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(
-      `${BASE_API_URL}listings/${listingId}/bids?_bids=true`,
+      `https://api.noroff.dev/api/v1/auction/listings/${listingId}/bids`,
       {
         method: "POST",
         headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${Token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ amount: Number(amount) }),
+        body: JSON.stringify({ amount }),
       }
     );
-    const data = await response.json();
-    return await data;
+
+    if (!response.ok) {
+      const errorBody = await response.json();
+      throw new Error(
+        `HTTP error! status: ${response.status}, body: ${JSON.stringify(
+          errorBody
+        )}`
+      );
+    }
+
+    return await response.json();
   } catch (error) {
-    return error;
+    console.error("Error in makeBid:", error);
+    throw new Error(error);
   }
 };
 

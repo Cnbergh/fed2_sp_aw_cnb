@@ -22,7 +22,7 @@ interface ProductsUIProps {
 
       {error && <Error errorKey="products_ui_error" message={error} />}
 
-      <div className="flex flex-col items-center gap-x-8 h-full px-16">
+      <div className="flex flex-row flex-wrap items-center gap-x-8 h-full px-16">
         {isLoading ? <Skeleton /> : products.map((product, index) => (
     <ProductItem key={`${product.id}-${index}`} product={product} />
   ))}
