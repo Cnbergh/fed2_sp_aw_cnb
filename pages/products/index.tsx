@@ -1,31 +1,32 @@
-import { useEffect, useState } from "react";
+import { Suspense } from "react";
 
-function PostPage() {
-  const [postData, setDataPost] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const searchQuery = window.location.search;
-      const url = new URLSearchParams(searchQuery);
-      const id = url.get("id");
-      const res = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
-      );
-      const json = await res.json();
-      console.log(json);
-      setDataPost(json);
-    };
+export type Props = {
+	searchParams: Record<string, string> | null | undefined;
+};
 
-    fetchData();
-  }, []);
-  return (
-    <>
-      <h1>A single post</h1>
-      <section>
-        <h2>{postData?.title}</h2>
-      </section>
-    </>
-  );
+
+export default async function HomePage(props: Props) {
+	const { searchParams } = props;
+	const showModal = searchParams?.modal === "true";
+	const productId = searchParams?.id;
+
+	const response = await fetch(PRODUCT_API, { next: { revalidate: 60 * 60 } });
+	const products = await response.json();
+
+	return (
+		<>
+			<ProductLayout>
+				{products.map((product: Product, idx: number) => {
+					return <ProductCard key={idx} {...product} />;
+				})}
+			</ProductLayout>
+
+			{showModal && (
+				<Suspense key={productId} fallback={<ProductLoading />}>
+					<ProductModal id={productId} />
+				</Suspense>
+			)}
+		</>
+	);
 }
-
-export default PostPage;

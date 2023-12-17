@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Product } from "../../pages/api/type";
 import MultiPurposeButton from "./ButtonMultiPurpose";
 import makeBid from "../../pages/api/makeBid";
-
 // next link
 import Link from "next/link";
+
 
 const FALLBACK_IMAGE = "/fallback-image.jpg";
 interface ProductItemProps {
@@ -35,7 +35,10 @@ function ProductItem({ product }: ProductItemProps) {
 
   return (
     <Link
-      href={`/listings/${product.id}`}
+      href={{
+        pathname: `/product/[id]`,
+        query: { id: product.id},
+      }}
       className="max-w-sm max-h-[500] rounded overflow-hidden shadow-lg"
     >
       <div className="w-full overflow-hidden">
