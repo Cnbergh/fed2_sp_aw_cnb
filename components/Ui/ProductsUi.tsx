@@ -31,7 +31,7 @@ interface ProductsUIProps {
       {!isLoading && products.length > 0 && loadMoreProducts && (
         <button 
           onClick={loadMoreProducts}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+          className="btn border-2 rounded-full border-white/50 w-full max-w-[700px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group color-accent">
           Load More
         </button>
       )}

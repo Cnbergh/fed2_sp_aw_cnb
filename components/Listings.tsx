@@ -3,9 +3,10 @@ import SearchBar from "./SearchBar";
 import ProductsUI from "./Ui/ProductsUi";
 import Skeleton from "./Ui/Skeleton";
 import { fetchApiListings } from "../pages/api/api";
+import { Product } from "../pages/api/type";
 
 export default function Listings() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [loadedProducts, setLoadedProducts] = useState(12);
@@ -23,7 +24,7 @@ export default function Listings() {
     try {
       const response = await fetchApiListings(0, loadedProducts, searchTerm, isActive, tag, sortBy);
       if (Array.isArray(response)) {
-        setData(response);
+        setData(response); 
       } else {
         console.error("Response is not an array:", response);
       }
@@ -34,32 +35,20 @@ export default function Listings() {
     }
   };
 
-  const handleSearch = (newSearchTerm) => {
+  const handleSearch = (newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);
     fetchData();
   };
 
-  const loadMoreProducts = () => {
-    setLoadedProducts(prev => prev + 12);
-  };
+  const loadMoreProducts = () => setLoadedProducts(prev => prev + 12);
 
-  if (isLoading && data.length === 0) {
-    return <Skeleton />;
-  }
-
-  if (error) {
-    return <span>Error: {error}</span>;
-  }
+  if (isLoading && data.length === 0) return <Skeleton />;
+  if (error) return <span>Error: {error}</span>;
 
   return (
     <>
       <SearchBar onSearch={handleSearch} />
-      <ProductsUI
-        products={data}
-        isLoading={isLoading}
-        error={error}
-        loadMoreProducts={loadMoreProducts}
-      />
+      <ProductsUI products={data} isLoading={isLoading} error={error} loadMoreProducts={loadMoreProducts} />
     </>
   );
 }

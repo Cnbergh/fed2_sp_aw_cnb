@@ -5,8 +5,8 @@ import MultiPurposeButton from "../../components/Ui/ButtonMultiPurpose";
 import Error from "../../components/Ui/Error";
 import BidsComponent from '../../components/AllBids';
 import makeBid from "../api/makeBid";
-// next link
 import Link from "next/link";
+import { ParsedUrlQuery } from "querystring";
 
 interface ProductPageProps {
   product: Product;
@@ -65,7 +65,7 @@ const ProductPage: NextPage<ProductPageProps> = ({ product }) => {
                 <span className="text-sm text-zinc-500">Bids: {product._count.bids}</span>
               </div>
               <p className="text-sm leading-loose">{product.description}</p>
-              <BidsComponent productId={product.id} />
+              <BidsComponent productId={product.id.toString()} />
           <div className="flex flex-row pb-3 px-3">
             <input
               type="number"
@@ -85,12 +85,13 @@ const ProductPage: NextPage<ProductPageProps> = ({ product }) => {
     </div>
   );
 };
+interface Params extends ParsedUrlQuery {
+  id: string;
+}
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.params;
-  const res = await fetch(
-    `https://api.noroff.dev/api/v1/auction/listings/${id}`
-  );
+  const { id } = context.params as Params;
+  const res = await fetch(`https://api.noroff.dev/api/v1/auction/listings/${id}`);
   const product: Product = await res.json();
   return {
     props: {
