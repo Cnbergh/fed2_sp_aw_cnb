@@ -41,7 +41,7 @@ const SignUp = () => {
     let errorMessages = [];
     let emailValid = /\S+@\S+\.\S+/.test(email);
 
-    if (!emailValid) errorMessages.push("Invalid email. Must be a stud.noroff.no or noroff.no");
+    if (!emailValid) errorMessages.push("Invalid email. Must be a @stud.noroff.no or @noroff.no");
     if (password.length < 4)
       errorMessages.push("Password must be at least 4 characters");
     if (password !== confirmPassword)
