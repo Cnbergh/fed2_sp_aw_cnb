@@ -13,16 +13,16 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   };
 
   return (
-    <div className="text-center my-20">
-      <form onSubmit={handleSubmit}>
+    <div className="text-center my-10 border-y-2 border-stone-700/50">
+      <form onSubmit={handleSubmit} className="flex flex-row">
         <input
-          className="text-black border-2 border-black rounded-full px-3 py-2"
+          className="hover: text-black border-4 border-accent/70 rounded-xl input max-w-xs"
           type="text"
           placeholder="Search listing..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button className="bg-black text-white rounded-full px-3 py-2 hover:bg-black/60" type="submit">
+        <button className="text-black/60 px-6 py-2 hover:text-black hover:after:content-['↚']" type="submit">
           Search
         </button>
       </form>

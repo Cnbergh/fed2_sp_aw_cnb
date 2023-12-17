@@ -35,8 +35,8 @@ const ProfileListings = () => {
   };
 
   return (
-    <div>
-      <h2>Your Listings</h2>
+    <div className="w-full h-full mx-auto">
+      <h2 className="h3 text-accent/70">Your Listings:</h2>
       <div className="flex flex-col items-center gap-x-8 h-full px-16">
         <ProductsUI
           products={data}

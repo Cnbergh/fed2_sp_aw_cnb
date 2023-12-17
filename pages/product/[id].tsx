@@ -33,12 +33,12 @@ const ProductPage: NextPage<ProductPageProps> = ({ product }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-10">
-      <Link href="/products" scroll={false}>
+      <Link href="javascript:javascript:history.go(-1)" scroll={false}>
         <div className="fixed inset-0 bg-black opacity-75 cursor-default"></div>
       </Link>
       <div className="relative w-full max-w-3xl bg-white rounded-md shadow-md">
         <div className="flex justify-between items-start p-4">
-          <Link href="/products" scroll={false}>
+          <Link href="javascript:javascript:history.go(-1)" scroll={false}>
             <div className="absolute top-2.5 right-2.5 h-6 w-6 text-accent rounded justify-center items-center flex pb-0.5 cursor-pointer">
               &times;
               <span className="sr-only">Close Modal</span>

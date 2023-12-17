@@ -72,7 +72,7 @@ const UpdateAvatar = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-row gap-4 w-full max-w-md">
+        <form onSubmit={handleSubmit} className="flex flex-row gap-4 w-full max-w-md max-h-[48px]">
             <input
                 id="imgURLInput"
                 type="text"
@@ -84,7 +84,7 @@ const UpdateAvatar = () => {
                     checkImageUrl(e.target.value);
                 }}
             />
-            <button id="uploadBTN" className="btn" disabled={!isValid || loading}>
+            <button id="uploadBTN" className="btn w-full border-b-2 border-accent/70 text-white/30 text-sm" disabled={!isValid || loading}>
                 {loading ? 'Updating...' : 'Add Profile Pic'}
             </button>
         </form>

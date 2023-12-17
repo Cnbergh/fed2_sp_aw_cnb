@@ -36,7 +36,7 @@ interface MultiPurposeButtonProps {
           <button
             onClick={handleClick}
             disabled={isBidButton && !isLoggedIn}
-            className={`btn border-2 rounded-full border-white/50 max-w-[700px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group color-accent ${
+            className={`btn border-2 rounded-xl border-white/30 max-w-[700px] px-8 transition-all duration-200 flex items-center justify-center overflow-hidden hover:border-white/50 hover:text-accent group text-white/100 ${
               isBidButton && !isLoggedIn ? 'disabled' : ''
             }`}
             aria-disabled={isBidButton && !isLoggedIn}
