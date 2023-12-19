@@ -18,7 +18,7 @@ interface ProductsUIProps {
   }: ProductsUIProps) {
     return (
     <article className='pb-20 mx-auto'>
-      <h4 className="text-2xl my-10 font-semibold text-accent/80">List of BiddingsRooms</h4>
+      <h4 className="text-2xl my-10 font-semibold text-accent/80">List of BiddingRooms</h4>
 
       {error && <Error errorKey="products_ui_error" message={error} />}
 

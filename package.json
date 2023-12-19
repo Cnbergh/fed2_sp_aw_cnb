@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "cypress:open": "cypress open",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint-fix": "eslint --fix .",
-    "cypress:open": "cypress open"
+    "lint-fix": "eslint --fix ."
   },
   "dependencies": {
     "@next/font": "^13.4.4",
