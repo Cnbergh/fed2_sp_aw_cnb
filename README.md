@@ -67,7 +67,7 @@ Create a fully responsive auction website that allows users to list items, bid o
 
 ### Learning Outcomes Demonstrated
 
-- Web development using HTML, CSS, and JavaScript
+- Web development using HTML, CSS, Tailwind, JavaScript/Typescript and React/NextJS.
 - REST API integration for dynamic data fetching
 - Comprehensive testing of the website
 - Deployment to a hosting platform
@@ -131,4 +131,4 @@ The website is deployed on Vercel, taking advantage of its integration with GitH
 
 ---
 
-Developed with ❤️ by [Cnbergh] Christian Nystad Bergh
+Developed with ❤️ by [Cnbergh] Christian Nystad Bergh ❤️
